@@ -20,7 +20,7 @@ A lightweight and flexible addon management framework for Python. Easily load, l
 
 ### **🔹 Installation & Usage**  
 ```bash
-git clone https://github.com/yourusername/Python-Addon-Framework.git
+git clone https://github.com/AhmetFurkanUcak/Python-Addon-Framework.git
 cd Python-Addon-Framework
 python main.py
 ```
