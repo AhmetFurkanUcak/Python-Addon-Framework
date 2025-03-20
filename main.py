@@ -1,7 +1,22 @@
 import os
 import importlib.util
+from colorama import init, Fore, Style
+
+init(autoreset=True)
 
 ADDONS_DIR = "addons"
+
+def show_banner():
+    banner = f"""
+{Fore.CYAN}{Style.BRIGHT}
+     ╔════════════════════════════════════════════╗
+     ║      {Fore.MAGENTA}🛠  PYTHON-ADDON-FRAMEWORK             {Fore.CYAN}║
+     ║      {Fore.YELLOW}github.com/{Fore.GREEN}AhmetFurkanUcak            {Fore.CYAN}║
+     ╚════════════════════════════════════════════╝
+{Style.RESET_ALL}
+    """
+    print(banner)
+
 
 def load_addons():
     """Loads addons from the addons directory."""
@@ -21,48 +36,44 @@ def load_addons():
     return addons
 
 def main():
+    show_banner()
+
     addons = load_addons()
 
     if not addons:
-        print("No addons found!")
+        print(Fore.RED + "No addons found!")
         return
 
     while True:
-        print("\n[Loaded Addons]")
+        print(Fore.BLUE + "\n[Loaded Addons]")
         for index, addon in enumerate(addons, start=1):
-            print(f"{index}. {addon.name}")
+            print(Fore.GREEN + f"{index}. {addon.name}")
 
-        print("\n0. Run All Addons")
-        print("Q. Quit")
+        print(Fore.YELLOW + "\n0. Run All Addons")
+        print(Fore.YELLOW + "Q. Quit")
 
         try:
-            choice = input("\nEnter the number of the addon to run (or 'Q' to quit): ").strip().lower()
+            choice = input(Fore.CYAN + "\nEnter the number of the addon to run (or 'Q' to quit): ").strip().lower()
             if choice == 'q':
-                print("Exiting...")
+                print(Fore.MAGENTA + "Exiting...")
                 break
 
             choice = int(choice)
 
             if choice == 0:
-                print("\nRunning all addons...\n")
+                print(Fore.CYAN + "\nRunning all addons...\n")
                 for addon in addons:
-                    print(f"Running {addon.name}...")
+                    print(Fore.GREEN + f"Running {addon.name}...")
                     addon.run()
             elif 1 <= choice <= len(addons):
                 selected_addon = addons[choice - 1]
-                print(f"\nRunning {selected_addon.name}...")
+                print(Fore.GREEN + f"\nRunning {selected_addon.name}...")
                 selected_addon.run()
             else:
-                print("Invalid choice! Please enter a valid number.")
+                print(Fore.RED + "Invalid choice! Please enter a valid number.")
 
         except ValueError:
-            print("Please enter a valid number!")
-
-    # Auto Run All Addons
-    # for addon in addons:
-    #     print(f"{addon.name} Running...")
-    #     addon.run()
+            print(Fore.RED + "Please enter a valid number!")
 
 if __name__ == "__main__":
     main()
-
